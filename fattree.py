@@ -1,5 +1,10 @@
+from mininet.net import Mininet
+from mininet.node import Controller, RemoteController
+from mininet.cli import CLI
+from mininet.log import setLogLevel, info
+from mininet.link import Link, Intf, TCLink
 from mininet.topo import Topo
-from mininet.link import TCLink
+from mininet.util import dumpNodeConnections
 import logging
 import os
 
@@ -22,20 +27,20 @@ class FatTree( Topo ):
         self.density = k/2
         self.iHost = self.iEdgeLayerSwitch * self.density
         
-        # self.bw_c2a = 0.2
-        # self.bw_a2e = 0.1
-        # self.bw_h2a = 0.05
+        self.bw_c2a = 0.2
+        self.bw_a2e = 0.1
+        self.bw_h2a = 0.05
 
         # Init Topo
         Topo.__init__(self)
   
         self.createTopo()
-        # logger.debug("Finished topology creation!")
+        logger.debug("Finished topology creation!")
 
-        # self.createLink( bw_c2a=self.bw_c2a, 
-        #                  bw_a2e=self.bw_a2e, 
-        #                  bw_h2a=self.bw_h2a)
-        # logger.debug("Finished adding links!")
+        self.createLink( bw_c2a=self.bw_c2a, 
+                         bw_a2e=self.bw_a2e, 
+                         bw_h2a=self.bw_h2a)
+        logger.debug("Finished adding links!")
 
     #    self.set_ovs_protocol_13()
     #    logger.debug("OF is set to version 1.3!")  
@@ -82,41 +87,35 @@ class FatTree( Topo ):
     """
     Add Link
     """
-    # def createLink(self, bw_c2a=0.2, bw_a2e=0.1, bw_h2a=0.5):
-            # def createLink(self, bw_c2a=0.2, bw_a2e=0.1, bw_h2a=0.5):
-    def createLink(self):
-
+    def createLink(self, bw_c2a=0.2, bw_a2e=0.1, bw_h2a=0.5):
         logger.debug("Add link Core to Agg.")
         end = self.pod/2
         for x in xrange(0, self.iAggLayerSwitch, end):
             for i in xrange(0, end):
                 for j in xrange(0, end):
-                    # linkopts = dict(bw=bw_c2a) 
+                    linkopts = dict(bw=bw_c2a) 
                     self.addLink(
                         self.CoreSwitchList[i*end+j],
                         self.AggSwitchList[x+i],
-                        # **linkopts)
-                        )
+                        **linkopts)
 
         logger.debug("Add link Agg to Edge.")
         for x in xrange(0, self.iAggLayerSwitch, end):
             for i in xrange(0, end):
                 for j in xrange(0, end):
-                    # linkopts = dict(bw=bw_a2e) 
+                    linkopts = dict(bw=bw_a2e) 
                     self.addLink(
                         self.AggSwitchList[x+i], self.EdgeSwitchList[x+j],
-                        # **linkopts)
-                        )
+                        **linkopts)
 
         logger.debug("Add link Edge to Host.")
         for x in xrange(0, self.iEdgeLayerSwitch):
             for i in xrange(0, self.density):
-                # linkopts = dict(bw=bw_h2a) 
+                linkopts = dict(bw=bw_h2a) 
                 self.addLink(
                     self.EdgeSwitchList[x],
                     self.HostList[self.density * x + i],
-                    # **linkopts)
-                    )
+                    **linkopts)
         
 topos = { 'fattree' : ( lambda k : FatTree(k)) }
 
