@@ -88,34 +88,31 @@ class FatTree( Topo ):
     Add Link
     """
     def createLink(self, bw_c2a=0.2, bw_a2e=0.1, bw_h2a=0.5):
-        logger.debug("Add link Core to Agg.")
+        logger.debug("Add link Core to Agg.001")
         end = self.pod/2
         for x in xrange(0, self.iAggLayerSwitch, end):
             for i in xrange(0, end):
                 for j in xrange(0, end):
-                    linkopts = dict(bw=bw_c2a) 
                     self.addLink(
                         self.CoreSwitchList[i*end+j],
                         self.AggSwitchList[x+i],
-                        **linkopts)
-
-        logger.debug("Add link Agg to Edge.")
+                        bw=bw_c2a)
+        logger.debug("001 end")
+        logger.debug("Add link Agg to Edge.002")
         for x in xrange(0, self.iAggLayerSwitch, end):
             for i in xrange(0, end):
                 for j in xrange(0, end):
-                    linkopts = dict(bw=bw_a2e) 
                     self.addLink(
                         self.AggSwitchList[x+i], self.EdgeSwitchList[x+j],
-                        **linkopts)
-
-        logger.debug("Add link Edge to Host.")
+                        bw=bw_a2e)
+        logger.debug("002 end")
+        logger.debug("Add link Edge to Host.003")
         for x in xrange(0, self.iEdgeLayerSwitch):
             for i in xrange(0, self.density):
-                linkopts = dict(bw=bw_h2a) 
                 self.addLink(
                     self.EdgeSwitchList[x],
                     self.HostList[self.density * x + i],
-                    **linkopts)
-        
+                    bw=bw_h2a)
+        logger.debug("003 end")
 topos = { 'fattree' : ( lambda k : FatTree(k)) }
 
