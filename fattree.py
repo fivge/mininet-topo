@@ -27,29 +27,31 @@ class FatTree( Topo ):
         self.density = k/2
         self.iHost = self.iEdgeLayerSwitch * self.density
         
-        self.bw_c2a = 0.2
-        self.bw_a2e = 0.1
-        self.bw_h2a = 0.05
+#        self.bw_c2a = 0.2
+#        self.bw_a2e = 0.1
+#        self.bw_h2a = 0.05
 
         # Init Topo
         Topo.__init__(self)
   
         self.createTopo()
-        logger.debug("Finished topology creation!")
+#        logger.debug("05.Finished topology creation!")
 
         self.createLink( bw_c2a=self.bw_c2a, 
                          bw_a2e=self.bw_a2e, 
                          bw_h2a=self.bw_h2a)
-        logger.debug("Finished adding links!")
+        logger.debug("002.Finished adding links!")
 
     #    self.set_ovs_protocol_13()
     #    logger.debug("OF is set to version 1.3!")  
     
     def createTopo(self):
+        logger.debug("001.self createTopo start")
         self.createCoreLayerSwitch(self.iCoreLayerSwitch)
         self.createAggLayerSwitch(self.iAggLayerSwitch)
         self.createEdgeLayerSwitch(self.iEdgeLayerSwitch)
         self.createHost(self.iHost)
+        logger.debug("001.self createTopo end")
 
     """
     Create Switch and Host
@@ -61,21 +63,21 @@ class FatTree( Topo ):
             if x >= int(10):
                 PREFIX = str(level) + "0"
             switch_list.append(self.addSwitch('s' + PREFIX + str(x)))
-
+    logger.debug("001.self createTopo really start")
     def createCoreLayerSwitch(self, NUMBER):
-        logger.debug("Create Core Layer")
+#        logger.debug("Create Core Layer")
         self._addSwitch(NUMBER, 1, self.CoreSwitchList)
 
     def createAggLayerSwitch(self, NUMBER):
-        logger.debug("Create Agg Layer")
+#        logger.debug("Create Agg Layer")
         self._addSwitch(NUMBER, 2, self.AggSwitchList)
 
     def createEdgeLayerSwitch(self, NUMBER):
-        logger.debug("Create Edge Layer")
+#        logger.debug("Create Edge Layer")
         self._addSwitch(NUMBER, 3, self.EdgeSwitchList)
 
     def createHost(self, NUMBER):
-        logger.debug("Create Host")
+#        logger.debug("Create Host")
         for x in xrange(1, NUMBER+1):
             PREFIX = "h00"
             if x >= int(10):
@@ -83,7 +85,8 @@ class FatTree( Topo ):
             elif x >= int(100):
                 PREFIX = "h"
             self.HostList.append(self.addHost(PREFIX + str(x)))
-
+        logger.debug("001.self createTopo really end")
+        
     """
     Add Link
     """
