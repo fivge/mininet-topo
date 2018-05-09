@@ -12,7 +12,7 @@ class MyTopo( Topo ):
         # Add hosts and switches
         ## Hosts
         
-        host11 = self.addHost( 'h11',mac='01:00:00:00:00:11',ip='10.0.0.1/8' )
+        host11 = self.addHost( 'h11',mac='01:00:00:00:01:11',ip='10.0.0.1/8' )
         host12 = self.addHost( 'h12',mac='01:00:00:00:00:12',ip='10.0.0.2/8' )
         host13 = self.addHost( 'h13',mac='01:00:00:00:00:13',ip='10.0.0.3/8' )
         host14 = self.addHost( 'h14',mac='01:00:00:00:00:14',ip='10.0.0.4/8' )
@@ -34,7 +34,7 @@ class MyTopo( Topo ):
         
         ## Switches
 
-        switch01 = self.addSwitch( 's01' )
+        switch01 = self.addSwitch( 's01' ,mac='00:00:00:00:00:01 )
         switch02 = self.addSwitch( 's02' )
         switch03 = self.addSwitch( 's03' )
         switch04 = self.addSwitch( 's04' )
