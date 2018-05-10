@@ -12,25 +12,25 @@ class MyTopo( Topo ):
         # Add hosts and switches
         ## Hosts
         
-        host11 = self.addHost( 'h11',mac='00:00:00:00:00:11' )
-        host12 = self.addHost( 'h12',mac='00:00:00:00:00:12' )
-        host13 = self.addHost( 'h13',mac='00:00:00:00:00:13' )
-        host14 = self.addHost( 'h14',mac='00:00:00:00:00:14' )
+        host11 = self.addHost( 'h11' )
+        host12 = self.addHost( 'h12' )
+        host13 = self.addHost( 'h13' )
+        host14 = self.addHost( 'h14' )
         
-        host21 = self.addHost( 'h21',mac='00:00:00:00:00:21' )
-        host22 = self.addHost( 'h22',mac='00:00:00:00:00:22' )
-        host23 = self.addHost( 'h23',mac='00:00:00:00:00:23' )
-        host24 = self.addHost( 'h24',mac='00:00:00:00:00:24' )
+        host21 = self.addHost( 'h21' )
+        host22 = self.addHost( 'h22' )
+        host23 = self.addHost( 'h23' )
+        host24 = self.addHost( 'h24' )
         
-        host31 = self.addHost( 'h31',mac='00:00:00:00:00:31' )
-        host32 = self.addHost( 'h32',mac='00:00:00:00:00:32' )
-        host33 = self.addHost( 'h33',mac='00:00:00:00:00:33' )
-        host34 = self.addHost( 'h34',mac='00:00:00:00:00:34' )
+        host31 = self.addHost( 'h31' )
+        host32 = self.addHost( 'h32' )
+        host33 = self.addHost( 'h33' )
+        host34 = self.addHost( 'h34' )
         
-        host41 = self.addHost( 'h41',mac='00:00:00:00:00:41' )
-        host42 = self.addHost( 'h42',mac='00:00:00:00:00:42' )
-        host43 = self.addHost( 'h43',mac='00:00:00:00:00:43' )
-        host44 = self.addHost( 'h44',mac='00:00:00:00:00:44' )
+        host41 = self.addHost( 'h41' )
+        host42 = self.addHost( 'h42' )
+        host43 = self.addHost( 'h43' )
+        host44 = self.addHost( 'h44' )
         ## Switches
         switch01 = self.addSwitch( 's01' )
         switch02 = self.addSwitch( 's02' )
