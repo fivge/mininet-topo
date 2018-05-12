@@ -27,9 +27,9 @@ class FatTree( Topo ):
         self.density = k/2
         self.iHost = self.iEdgeLayerSwitch * self.density
         
-#        self.bw_c2a = 0.2
-#        self.bw_a2e = 0.1
-#        self.bw_h2a = 0.05
+        self.bw_c2a = 0.2
+        self.bw_a2e = 0.1
+        self.bw_h2a = 0.05
 
         # Init Topo
         Topo.__init__(self)
