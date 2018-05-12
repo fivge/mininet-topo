@@ -18,7 +18,7 @@ class MyTopo( Topo ):
 
         # Initialize topology
         Topo.__init__( self )
-        L1 = 2
+        L1 = 4
         L2 = L1 * 2 
         L3 = L2
         c = []
