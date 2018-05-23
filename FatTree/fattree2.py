@@ -21,9 +21,12 @@ class FatTree( Topo ):
         self.density = k/2
         self.iHost = self.iEdgeLayerSwitch * self.density
         
-        self.bw_c2a = 0.2
-        self.bw_a2e = 0.1
-        self.bw_h2a = 0.05
+        # self.bw_c2a = 0.2
+        # self.bw_a2e = 0.1
+        # self.bw_h2a = 0.05
+        self.bw_c2a = 400
+        self.bw_a2e = 200
+        self.bw_h2a = 100
 
         # Init Topo
         Topo.__init__(self)
@@ -77,13 +80,13 @@ class FatTree( Topo ):
     """
     Add Link
     """
-    def createLink(self, bw_c2a=1024, bw_a2e=200, bw_h2a=100):
+    def createLink(self, bw_c2a=400, bw_a2e=200, bw_h2a=100):
         # logger.debug("Add link Core to Agg.")
         end = self.pod/2
         for x in xrange(0, self.iAggLayerSwitch, end):
             for i in xrange(0, end):
                 for j in xrange(0, end):
-                    linkopts = dict(bw=bw_c2a, delay='5ms', loss=30, max_queue_size=1000, use_htb=True) 
+                    linkopts = dict(bw=bw_c2a, delay='5ms', loss=0, max_queue_size=1000, use_htb=True) 
                     self.addLink(
                         self.CoreSwitchList[i*end+j],
                         self.AggSwitchList[x+i],
@@ -93,7 +96,7 @@ class FatTree( Topo ):
         for x in xrange(0, self.iAggLayerSwitch, end):
             for i in xrange(0, end):
                 for j in xrange(0, end):
-                    linkopts = dict(bw=bw_a2e, delay='5ms', loss=40, max_queue_size=1000, use_htb=True) 
+                    linkopts = dict(bw=bw_a2e, delay='5ms', loss=0, max_queue_size=1000, use_htb=True) 
                     self.addLink(
                         self.AggSwitchList[x+i], self.EdgeSwitchList[x+j],
                         **linkopts)
@@ -101,7 +104,7 @@ class FatTree( Topo ):
         # logger.debug("Add link Edge to Host.")
         for x in xrange(0, self.iEdgeLayerSwitch):
             for i in xrange(0, self.density):
-                linkopts = dict(bw=bw_h2a, delay='5ms', loss=40, max_queue_size=1000, use_htb=True) 
+                linkopts = dict(bw=bw_h2a, delay='5ms', loss=0, max_queue_size=1000, use_htb=True) 
                 self.addLink(
                     self.EdgeSwitchList[x],
                     self.HostList[self.density * x + i],
